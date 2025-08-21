@@ -1,0 +1,81 @@
+#
+# These things are run when an Openbox X Session is started.
+# You may place a similar script in $HOME/.config/openbox/autostart
+# to run user-specific things.
+#
+
+# If you want to use GNOME config tools...
+#
+#if test -x /usr/lib/aarch64-linux-gnu/gnome-settings-daemon >/dev/null; then
+#  /usr/lib/aarch64-linux-gnu/gnome-settings-daemon &
+#elif which gnome-settings-daemon >/dev/null 2>&1; then
+#  gnome-settings-daemon &
+#fi
+
+# If you want to use XFCE config tools...
+#
+#xfce-mcs-manager &
+
+# Configuration
+WEBSITE_URL="http://127.0.0.1:32500"
+
+# Disable screensaver, screen blanking, and power management
+xset s off
+xset s noblank
+xset -dpms
+
+# Auto-detect screen resolution
+RESOLUTION=$(xrandr 2>/dev/null | grep '*' | awk '{print $1}')
+if [ -z "$RESOLUTION" ]; then
+    RESOLUTION="1024x600"  # Default fallback can be ="1280x720"
+fi
+SCREEN_WIDTH=$(echo $RESOLUTION | cut -d 'x' -f1)
+SCREEN_HEIGHT=$(echo $RESOLUTION | cut -d 'x' -f2)
+
+
+echo "Detected screen resolution: ${SCREEN_WIDTH}x${SCREEN_HEIGHT}"
+
+# Check internet connection using ping before launching Chromium
+if ping -c 1 -W 2 google.com >/dev/null 2>&1; then
+    echo "Internet connected. Proceeding with Chromium launch."
+else
+    echo "No internet connection detected. Exiting."
+fi
+# Allow quitting the X server with CTRL-ALT-Backspace
+# setxkbmap -option terminate:ctrl_alt_bksp
+
+# Prevent Chromium restore prompts
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
+sed -i 's/"exit_type":"[^"]\+"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
+
+# Clean up Chromium cache, cookies, and logs
+#find ~/.config/chromium/Default/ -type f \( -name "Cookies" -o -name "History" -o -name "*.log" -o -name "*.ldb" -o -name "*.sqlite" \) -delete
+#rm -rf ~/.config/chromium/Default/Logs/*
+
+# Clear system logs
+#sudo journalctl --vacuum-time=1d
+#sudo find /var/log -type f \( -name "*.log" -o -name "*.gz" -o -name "*.1" \) -delete
+#sudo truncate -s 0 /var/log/syslog /var/log/dmesg
+
+# Kill any existing Chromium instances
+pkill -9 chromium-browser 2>/dev/null
+pkill -9 chrome 2>/dev/null
+
+
+# Start Chromium in kiosk mode
+chromium-browser --kiosk --disable-gpu --noerrdialogs --disable-infobars --disab8le-features=TranslateUI \
+    --disable-session-crashed-bubble --no-sandbox --disable-notifications --disable-sync-preferences \
+    --no-sandbox --disable-background-mode --disable-popup-blocking --no-first-run \
+    --enable-gpu-rasterization --disable-translate --disable-logging --disable-default-apps \
+    --disable-extensions --disable-crash-reporter --disable-pdf-extension --disable-new-tab-first-run \
+    --disable-dev-shm-usage --start-maximized --mute-audio --disable-crashpad --hide-scrollbars \
+    --ash-hide-cursor --force-device-scale-factor=1 --window-position=0,0 \
+    --no-memcheck "$WEBSITE_URL" &
+#    --no-memcheck --window-size=${SCREEN_WIDTH},${SCREEN_HEIGHT} "$WEBSITE_URL" &
+
+if [ $? -eq 0 ]; then
+    echo "Chromium started successfully."
+else
+    echo "Failed to start Chromium."
+    sudo reboot
+fi
