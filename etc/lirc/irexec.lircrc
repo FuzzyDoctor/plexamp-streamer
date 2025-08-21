@@ -1,0 +1,81 @@
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXC_PLAY
+        config=curl http://127.0.0.1:32500/player/playback/play
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXC_PAUSE
+        config=curl http://127.0.0.1:32500/player/playback/pause
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXC_NEXT
+        config=curl http://127.0.0.1:32500/player/playback/skipNext
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXC_PREV
+        config=curl http://127.0.0.1:32500/player/playback/skipPrevious
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXC_STOP
+        config=curl http://127.0.0.1:32500/player/playback/pause
+end
+
+
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXN_PLAY_PAUSE
+        config=curl http://127.0.0.1:32500/player/playback/pause
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXN_ENTER
+        config=curl http://127.0.0.1:32500/player/playback/play
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXN_NEXT
+        config=curl http://127.0.0.1:32500/player/playback/skipNext
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXN_PREV
+        config=curl http://127.0.0.1:32500/player/playback/skipPrevious
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXN_PRESET_1
+        config=curl http://127.0.0.1:32500/player/playback/createPlayQueue?playlistID=11871\&shuffle=1
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXN_PRESET_2
+        config=curl http://127.0.0.1:32500/player/playback/createPlayQueue?uri=serverXXXXXXcom.plexapp.plugins.library%2Flibrary%2Fsections%2F3%2Fstations%2F7%2F12826%3FincludeSharedContent%3D1%26maxDegreesOfSeparation%3D-1
+
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXN_UP
+        config=sudo /opt/brightup.sh
+end
+begin
+        remote=cambridge_cx_remote
+        prog=irexec
+        button=CXN_DOWN
+        config=sudo /opt/brightdown.sh
+end
