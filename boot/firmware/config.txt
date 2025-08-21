@@ -29,5 +29,5 @@ dtoverlay=rotary-encoder:relative_axis=1,linux_axis=9,pin_a=4,pin_b=17
 # push button, KEY_? (PIN24, GPIO8)
 dtoverlay=gpio-key,gpio=8,label="circle-button",keycode=40
 
-# NOT IMPLEMENTED Rotary push button, KEY_MUTE (PIN5, GPIO2)
+# NOT IMPLEMENTED Rotary push button, KEY_MUTE (PIN3, GPIO2)
 # dtoverlay=gpio-key,gpio=2,label="rotary-switch",keycode=13
