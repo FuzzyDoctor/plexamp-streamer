@@ -1,0 +1,15 @@
+[Unit]
+Description=Front Panel Controls
+After=multi-user.target
+
+[Service]
+User=kade
+WorkingDirectory=/opt/
+ExecStart=/usr/bin/python3 /opt/control.py
+KillSignal=SIGINT
+Restart=always
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
