@@ -1,6 +1,7 @@
 # plexamp-streamer
 
-This is not a complete set of instructions, but some basic guidance.
+This is not a complete set of instructions, but some basic guidance. I assume that you have some knowledge about installing prerequisites, file permissions, etc.
+
 # hardware
 Here is the BoM, excluding the 3d printed components and the RPi.
 
