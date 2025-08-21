@@ -1,0 +1,33 @@
+dtparam=i2c_arm=on
+display_auto_detect=1
+auto_initramfs=1
+disable_fw_kms_setup=1
+arm_64bit=1
+disable_overscan=1
+arm_boost=1
+
+[cm4]
+otg_mode=1
+[cm5]
+dtoverlay=dwc2,dr_mode=host
+
+[all]
+disable_splash=1
+
+# enabling UART also allows for the system LED to be wired between PIN8 and GND (pin 6) consider small resistor
+enable_uart=1
+
+# IR receiver (PIN16, GPIO23)
+dtoverlay=gpio-ir,gpio_pin=23
+
+# shutdown button (PIN5, GPIO3) - go between pins 5-9 (9 being GND)
+dtoverlay=gpio-shutdown
+
+# rotary encoder control (CLK = A (PIN7, GPIO4), DT = B (PIN11, GPIO17), SWITCH PIN NOT IMPLEMENTED
+dtoverlay=rotary-encoder:relative_axis=1,linux_axis=9,pin_a=4,pin_b=17
+
+# push button, KEY_? (PIN24, GPIO8)
+dtoverlay=gpio-key,gpio=8,label="circle-button",keycode=40
+
+# NOT IMPLEMENTED Rotary push button, KEY_MUTE (PIN5, GPIO2)
+# dtoverlay=gpio-key,gpio=2,label="rotary-switch",keycode=13
