@@ -90,7 +90,7 @@ module Bracket(){
         union() {    
             translate([screen_position-10,panel_thick,(panel_height/2)-25/2]) {
                 cube([13,screen_thick+screen_thick_b-panel_thick+screen_mount_depth+2,25]);
-                translate([10,screen_thick+screen_thick_b-panel_thick+screen_mount_depth,-(screen_height_b/2)+25/2]) cube([8,2,screen_height_b]);
+                //translate([10,screen_thick+screen_thick_b-panel_thick+screen_mount_depth,-(screen_height_b/2)+25/2]) cube([8,2,screen_height_b]);
                 //translate([10/2,screen_thick+screen_thick_b-panel_thick+screen_mount_depth+2,5]) rotate([90,0,0]) cylinder(d=3.5,h=screen_thick+screen_thick_b+screen_mount_depth+2, $fn=20);  
             }
         }
@@ -155,8 +155,7 @@ module Hardware() {
             translate([13, -0.01, panel_height-7.3]) Screw();
             translate([panel_width-13, -0.01, 7.3]) Screw();
             translate([panel_width-13, -0.01, panel_height-7.3]) Screw();
-            //IR hole
-            translate([8+8,panel_thick+0.1,17]) rotate([90,0,0]) cylinder(d=3,h=panel_thick+0.1,$fn=200);
+            
     }
 
 }
@@ -165,5 +164,6 @@ module Hardware() {
 //Case();
 Panel();
 //Screen();
-//Bracket();
+Bracket();
 //Hardware();
+
