@@ -70,11 +70,24 @@ The display brackets are fitted with M3x12 screws, anything M3 10-12 should work
 1. Install Plexamp headless as per instruction here (unless updated)
 https://howtohifi.com/how-to-create-a-headless-plexamp-player-using-odinbs-plexamp-installer-script/
 
-2. Install Openbox and Chromium browser using this as your primary guide
-https://read.sanjaysikdar.dev/raspberry-pi-zero-2w-kiosk
-(note I have u0ploaded my autostart file in the /etc/X11/openbox directory)
+2. Install Unclutter and Chromium Browser
+(PREVIOUSLY I used Openbox, but it was slower and Unclutter demonstrated much better graphics performance)
+```
+sudo apt-get update
 
-3. Install LIRC if you want an IR remote (plenty of guides online, you will need to match your remote and config file if you want to use my bright-up and bright-down scripts)
+sudo apt-get install --no-install-recommends xserver-xorg-video-all \
+  xserver-xorg-input-all xserver-xorg-core xinit x11-xserver-utils chromium-browser unclutter
 
-4. Install python and prerequisites so you can get the buttons and wheel running.
+# Go to System Options > Auto Login > Enable
+sudo raspi-config
+```
+3. Now edit ~/.bash_profile to automatically start xorg (GUI)
+```
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx -- -nocursor
+```
+4. Copy in the provided .xinitrc file to ~/.xinitrc, this will automatically start the chromium browser when xorg starts
+
+5. Install LIRC if you want an IR remote (plenty of guides online, you will need to match your remote and config file if you want to use my bright-up and bright-down scripts)
+
+6. Install python and prerequisites so you can get the buttons and wheel running.
 
