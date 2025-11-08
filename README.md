@@ -25,6 +25,7 @@ https://a.aliexpress.com/_mML5wtJ
 https://a.aliexpress.com/_m0J5Y1n
 
 https://a.aliexpress.com/_m09CuTF
+(alternative case link: https://a.aliexpress.com/_mKaXfBn)
 
 https://a.aliexpress.com/_mMjBxUv
 
